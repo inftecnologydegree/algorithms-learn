@@ -5,11 +5,14 @@ const path = require('path');
 const PORT = 3000;
 
 const server = http.createServer((req, res) => {
-    // Define o caminho do arquivo baseado na URL requisitada
-    let filePath = req.url === '/' ? './public/index.html' : './public' + req.url;
+    let url = req.url;
+    
+    // Rota padrão para a home
+    if (url === '/') url = '/index.html';
+    
+    let filePath = './public' + url;
     let extname = String(path.extname(filePath)).toLowerCase();
     
-    // Mapeia os tipos de arquivos suportados
     const mimeTypes = {
         '.html': 'text/html',
         '.css': 'text/css',
@@ -18,15 +21,14 @@ const server = http.createServer((req, res) => {
 
     let contentType = mimeTypes[extname] || 'application/octet-stream';
 
-    // Lê e entrega o arquivo solicitado
     fs.readFile(filePath, (error, content) => {
         if (error) {
             if(error.code == 'ENOENT') {
                 res.writeHead(404, { 'Content-Type': 'text/html' });
-                res.end('<h1>Erro 404: Arquivo Não Encontrado</h1>', 'utf-8');
+                res.end('<h1>Erro 404: Página não encontrada</h1>', 'utf-8');
             } else {
                 res.writeHead(500);
-                res.end(`Erro interno do servidor: ${error.code}`);
+                res.end(`Erro no servidor: ${error.code}`);
             }
         } else {
             res.writeHead(200, { 'Content-Type': contentType });
@@ -36,5 +38,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, () => {
-    console.log(`Servidor rodando com sucesso em http://localhost:${PORT}`);
+    console.log(`Servidor rodando em http://localhost:3000`);
 });
