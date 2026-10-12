@@ -1,0 +1,67 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #ffffff;
+    padding: 40px;
+}
+
+.container {
+    display: flex;
+    max-width: 1100px;
+    width: 100%;
+    gap: 40px;
+}
+
+.texto-lateral {
+    flex: 1;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333333;
+    text-align: justify;
+}
+
+.texto-lateral p {
+    margin-bottom: 20px;
+}
+
+.grade-algoritmos {
+    flex: 2;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.caixa-card {
+    border: 2px solid #000000;
+    border-radius: 15px;
+    aspect-ratio: 1.2 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 15px;
+    transition: background-color 0.2s, transform 0.1s;
+    background-color: #ffffff;
+}
+
+.caixa-card span {
+    font-size: 18px;
+    color: #000000;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Efeito sutil ao passar o mouse para dar feedback de clique */
+.caixa-card:hover {
+    background-color: #f5f5f5;
+    transform: scale(1.02);
+}
